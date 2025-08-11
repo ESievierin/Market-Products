@@ -4,7 +4,7 @@ namespace Market.Products.BLL.Interfaces
 {
     public interface ICategoryService
     {
-        public Task<List<CategoryDto>> GetAllAsync();
+        public Task<CategoryDto[]> GetAllAsync();
         public Task<string> GetNameByIdAsync(int categoryId);
     }
 }

@@ -16,7 +16,7 @@ namespace Market.Products.BLL.RequestHandlers.Product
             var product = mapper.Map<ProductDto>(await
                 dbContext.Products
                     .AsNoTracking()
-                    .FirstAsync(p => p.Id == request.id, cancellationToken)
+                    .FirstOrDefaultAsync(p => p.Id == request.id, cancellationToken)
              );
 
             if (product == null) 

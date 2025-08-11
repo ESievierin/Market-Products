@@ -7,16 +7,16 @@ namespace Market.Products.BLL.Services
 {
     public sealed class ProductService(IMediator mediator) : IProductService
     {
-        public async Task<List<ShortProductDto>> GetAllShortAsync() =>
+        public async Task<ShortProductDto[]> GetAllShortAsync() =>
             await mediator.Send(new GetAllShortProductsQuery());
 
-        public async Task<List<ShortProductDto>> GetByCategoryShortAsync(int categoryId) =>
+        public async Task<ShortProductDto[]> GetByCategoryShortAsync(int categoryId) =>
             await mediator.Send(new GetShortProductsByCategoryQuery(categoryId));
 
         public async Task<ProductDto> GetByIdAsync(int id) =>
             await mediator.Send(new GetProductByIdQuery(id));
 
-        public async Task<List<ShortProductDto>> GetShortByIdsAsync(List<int> ids) =>
+        public async Task<ShortProductDto[]> GetShortByIdsAsync(int[] ids) =>
             await mediator.Send(new GetShortProductsByIdsQuery(ids));
     }
 }

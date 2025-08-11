@@ -6,14 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Market.Products.BLL.RequestHandlers.Category
 {
-    public record GetAllCategoriesQuery() : IRequest<List<CategoryDto>>;
-    public sealed class GetAllCategoriesQueryHandler(MarketProductsDbContext dbContext, IMapper mapper) : IRequestHandler<GetAllCategoriesQuery, List<CategoryDto>>
+    public record GetAllCategoriesQuery() : IRequest<CategoryDto[]>;
+    public sealed class GetAllCategoriesQueryHandler(MarketProductsDbContext dbContext, IMapper mapper) : IRequestHandler<GetAllCategoriesQuery, CategoryDto[]>
     {
-        public async Task<List<CategoryDto>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken) =>
-            mapper.Map<List<CategoryDto>>(await 
+        public async Task<CategoryDto[]> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken) =>
+            mapper.Map<CategoryDto[]>(await 
                 dbContext.Categories
                     .AsNoTracking()
-                    .ToListAsync(cancellationToken)
+                    .ToArrayAsync(cancellationToken)
             );
     }
 }

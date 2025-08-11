@@ -13,19 +13,19 @@ namespace Market.Products.API.Controllers
             await productService.GetByIdAsync(id);
 
         [HttpGet]
-        public async Task<List<ShortProductDto>> GetAllShortAsync() =>
+        public async Task<ShortProductDto[]> GetAllShortAsync() =>
             await productService.GetAllShortAsync();
 
         [HttpGet("bycategory/{categoryId}")]
-        public async Task<List<ShortProductDto>> GetByCategoryShortAsync(int categoryId) =>
+        public async Task<ShortProductDto[]> GetByCategoryShortAsync(int categoryId) =>
             await productService.GetByCategoryShortAsync(categoryId);
 
         [HttpPost("byids")]
-        public async Task<List<ShortProductDto>> GetShortByIdsAsync([FromBody] List<int> ids)
+        public async Task<ShortProductDto[]> GetShortByIdsAsync([FromBody] int[] ids)
         {
             if (ids == null || !ids.Any())
             {
-                return new List<ShortProductDto>();
+                return Array.Empty<ShortProductDto>();
             }
             return await productService.GetShortByIdsAsync(ids);
         }

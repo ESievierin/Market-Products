@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Market.Products.BLL.RequestHandlers.Product
 {
-    public record GetShortProductsByCategoryQuery(int CategoryId) : IRequest<List<ShortProductDto>>;
-    public sealed class GetShortProductsByCategoryQueryHandler(MarketProductsDbContext dbContext) : IRequestHandler<GetShortProductsByCategoryQuery, List<ShortProductDto>>
+    public record GetShortProductsByCategoryQuery(int CategoryId) : IRequest<ShortProductDto[]>;
+    public sealed class GetShortProductsByCategoryQueryHandler(MarketProductsDbContext dbContext) : IRequestHandler<GetShortProductsByCategoryQuery, ShortProductDto[]>
     {
-        public async Task<List<ShortProductDto>> Handle(GetShortProductsByCategoryQuery request, CancellationToken cancellationToken) =>
+        public async Task<ShortProductDto[]> Handle(GetShortProductsByCategoryQuery request, CancellationToken cancellationToken) =>
             await dbContext.Products
                 .AsNoTracking()
                 .Where(p => p.CategoryId == request.CategoryId)
@@ -18,6 +18,6 @@ namespace Market.Products.BLL.RequestHandlers.Product
                     Name = p.Name,
                     Price = p.Price,
                 })
-                .ToListAsync(cancellationToken);
+                .ToArrayAsync(cancellationToken);
     }
 }

@@ -13,7 +13,7 @@ namespace Market.Products.API.Controllers
             await categoryService.GetNameByIdAsync(id);
 
         [HttpGet]
-        public async Task<List<CategoryDto>> GetAllAsync() =>
+        public async Task<CategoryDto[]> GetAllAsync() =>
             await categoryService.GetAllAsync();
     }
 }

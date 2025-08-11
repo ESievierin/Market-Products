@@ -7,7 +7,7 @@ namespace Market.Products.BLL.Services
 {
     public sealed class CategoryService(IMediator mediator) : ICategoryService
     {
-        public async Task<List<CategoryDto>> GetAllAsync() =>
+        public async Task<CategoryDto[]> GetAllAsync() =>
             await mediator.Send(new GetAllCategoriesQuery());
 
         public async Task<string> GetNameByIdAsync(int categoryId) =>

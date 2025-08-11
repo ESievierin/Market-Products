@@ -1,0 +1,9 @@
+﻿namespace Market.Products.BLL.DTO
+{
+    public sealed class ShortProductDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+        public decimal Price { get; set; }
+    }
+}

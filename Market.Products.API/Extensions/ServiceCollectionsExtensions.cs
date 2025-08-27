@@ -15,7 +15,7 @@ namespace Market.Products.API.Extensions
             {
                 option.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Market User API",
+                    Title = "Market Product API",
                     Version = "v1"
                 });
 

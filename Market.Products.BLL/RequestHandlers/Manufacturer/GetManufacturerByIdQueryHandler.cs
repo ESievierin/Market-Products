@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Market.Products.BLL.RequestHandlers.Manufacturer
 {
-    public record GetManufacturerByIdQuery(int id) : IRequest<ManufacturerDto>;
+    public record GetManufacturerByIdQuery(int Id) : IRequest<ManufacturerDto>;
     public sealed class GetManufacturerByIdQueryHandler(MarketProductsDbContext dbContext, IMapper mapper) : IRequestHandler<GetManufacturerByIdQuery, ManufacturerDto> 
     {
         public async Task<ManufacturerDto> Handle(GetManufacturerByIdQuery request, CancellationToken cancellationToken) 
@@ -16,12 +16,12 @@ namespace Market.Products.BLL.RequestHandlers.Manufacturer
             var manufacturer  = mapper.Map<ManufacturerDto>(await 
                 dbContext.Manufacturers
                     .AsNoTracking()
-                    .FirstOrDefaultAsync(m => m.Id == request.id, cancellationToken)
+                    .FirstOrDefaultAsync(m => m.Id == request.Id, cancellationToken)
             );
 
             if (manufacturer == null)
             {
-                throw new EntityNotFoundException<ManufacturerDbModel>(request.id);
+                throw new EntityNotFoundException<ManufacturerDbModel>(request.Id);
             }
 
             return manufacturer;

@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Market.Products.BLL.RequestHandlers.Product
 {
-    public record GetShortProductsByIdsQuery(int[] ids) : IRequest<ShortProductDto[]>;
+    public record GetShortProductsByIdsQuery(int[] Ids) : IRequest<ShortProductDto[]>;
     public sealed class GetShortProductsByIdsQueryHandler(MarketProductsDbContext dbContext) : IRequestHandler<GetShortProductsByIdsQuery, ShortProductDto[]>
     {
         public async Task<ShortProductDto[]> Handle(GetShortProductsByIdsQuery request, CancellationToken cancellationToken) =>
             await dbContext.Products
                 .AsNoTracking()
-                .Where(p => request.ids.Contains(p.Id))
+                .Where(p => request.Ids.Contains(p.Id))
                 .Select(p => new ShortProductDto
                 {
                     Id = p.Id,

@@ -8,6 +8,6 @@ namespace Market.Products.BLL.Interfaces
         public Task<ShortProductDto[]> GetShortByIdsAsync(int[] ids);
         public Task<ShortProductDto[]> GetByCategoryShortAsync(int categoryId);
         public Task<ProductDto> GetByIdAsync(int id);
-
+        public Task<ProductDetailsDto> GetProductDetailsByIdAsync(int id);
     }
 }

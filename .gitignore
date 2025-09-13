@@ -19,6 +19,8 @@ obj/
 *.tlog
 *.ide
 
+Dockerfile
+
 *.Publish.xml
 publish/
 

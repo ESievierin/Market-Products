@@ -29,5 +29,9 @@ namespace Market.Products.API.Controllers
             }
             return await productService.GetShortByIdsAsync(ids);
         }
+
+        [HttpGet("details/{id}")]
+        public async Task<ProductDetailsDto> GetProductDetailsByIdAsync(int id) =>
+            await productService.GetProductDetailsByIdAsync(id);
     }
 }

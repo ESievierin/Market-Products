@@ -56,6 +56,11 @@ namespace Market.Products.API.Extensions
             });
             return builder;
         }
+        public static WebApplicationBuilder AddTime(this WebApplicationBuilder builder) 
+        {
+            builder.Services.AddSingleton<TimeProvider>(TimeProvider.System);
+            return builder;
+        }
         public static WebApplicationBuilder AddApplicationService(this WebApplicationBuilder builder)
         {
             builder.Services

@@ -11,6 +11,7 @@ namespace Market.Products.API.Mappers
             CreateMap<CategoryDbModel, CategoryDto>();
             CreateMap<ProductDbModel, ProductDto>();
             CreateMap<ManufacturerDbModel, ManufacturerDto>();
+            CreateMap<ProductDbModel, ShortProductDto>();
         }
     }
 }

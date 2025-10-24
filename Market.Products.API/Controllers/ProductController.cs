@@ -2,6 +2,7 @@
 using Market.Products.API.Models;
 using Market.Products.BLL.DTO;
 using Market.Products.BLL.Interfaces;
+using Market.Products.BLL.Models.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Market.Products.API.Controllers
@@ -15,12 +16,12 @@ namespace Market.Products.API.Controllers
             await productService.GetByIdAsync(id);
 
         [HttpGet]
-        public async Task<ShortProductDto[]> GetAllShortAsync() =>
-            await productService.GetAllShortAsync();
+        public async Task<ShortProductDto[]> GetPaginatedShortAsync([FromQuery] FiltersPagination pagination) =>
+            await productService.GetPaginatedShortAsync(pagination);
 
-        [HttpGet("bycategory/{categoryId}")]
-        public async Task<ShortProductDto[]> GetByCategoryShortAsync(int categoryId) =>
-            await productService.GetByCategoryShortAsync(categoryId);
+        [HttpPost("filter")]
+        public async Task<ShortProductDto[]> GetFilteredProducts(ProductsFilterDto filter) =>
+            await productService.GetFilteredShortAsync(filter);
 
         [HttpPost("byids")]
         public async Task<ShortProductDto[]> GetShortByIdsAsync([FromBody] int[] ids)

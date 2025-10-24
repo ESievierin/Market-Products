@@ -1,5 +1,6 @@
 ﻿using Market.Products.BLL.DTO;
 using Market.Products.BLL.Interfaces;
+using Market.Products.BLL.Models.Filters;
 using Market.Products.BLL.RequestHandlers.Product;
 using MediatR;
 
@@ -7,11 +8,11 @@ namespace Market.Products.BLL.Services
 {
     public sealed class ProductService(IMediator mediator) : IProductService
     {
-        public async Task<ShortProductDto[]> GetAllShortAsync() =>
-            await mediator.Send(new GetAllShortProductsQuery());
+        public async Task<ShortProductDto[]> GetPaginatedShortAsync(FiltersPagination pagination) =>
+            await mediator.Send(new GetPaginatedShortProductsQuery(pagination));
 
-        public async Task<ShortProductDto[]> GetByCategoryShortAsync(int categoryId) =>
-            await mediator.Send(new GetShortProductsByCategoryQuery(categoryId));
+        public async Task<ShortProductDto[]> GetFilteredShortAsync(ProductsFilterDto filter) =>
+            await mediator.Send(new GetFilteredShortProductsQuery(filter));
 
         public async Task<ProductDto> GetByIdAsync(int id) =>
             await mediator.Send(new GetProductByIdQuery(id));

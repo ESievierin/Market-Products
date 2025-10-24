@@ -13,6 +13,7 @@ namespace Market.Products.API.Mappers
             CreateMap<ProductDbModel, ProductDto>().ReverseMap();
             CreateMap<ManufacturerDbModel, ManufacturerDto>();
             CreateMap<CreateProductRequest, ProductDto>();
+            CreateMap<ProductDbModel, ShortProductDto>();
         }
     }
 }

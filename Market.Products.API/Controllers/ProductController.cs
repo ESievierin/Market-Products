@@ -1,4 +1,6 @@
-﻿using Market.Products.BLL.DTO;
+﻿using AutoMapper;
+using Market.Products.API.Models;
+using Market.Products.BLL.DTO;
 using Market.Products.BLL.Interfaces;
 using Market.Products.BLL.Models.Filters;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +9,7 @@ namespace Market.Products.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController(IProductService productService) : ControllerBase
+    public class ProductController(IProductService productService, IMapper mapper) : ControllerBase
     {
         [HttpGet("{id}")]
         public async Task<ProductDto> GetByIdAsync(int id) =>
@@ -34,5 +36,13 @@ namespace Market.Products.API.Controllers
         [HttpGet("details/{id}")]
         public async Task<ProductDetailsDto> GetProductDetailsByIdAsync(int id) =>
             await productService.GetProductDetailsByIdAsync(id);
+
+        [HttpPost("create")]
+        public async Task Create(CreateProductRequest product) =>
+            await productService.CreateAsync(mapper.Map<ProductDto>(product));
+
+        [HttpPost("update")]
+        public async Task Create(ProductDto product) =>
+            await productService.UpdateAsync(product);
     }
 }

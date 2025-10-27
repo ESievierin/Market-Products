@@ -6,6 +6,7 @@ builder.Services.AddControllers();
 
 builder.AddSwagger()
     .AddData()
+    .AddFileService()
     .AddTime()
     .AddApplicationService()
     .AddMappers()

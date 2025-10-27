@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Market.Products.API.Models;
 using Market.Products.BLL.DTO;
 using Market.Products.DAL.DbModels;
 
@@ -12,8 +11,8 @@ namespace Market.Products.API.Mappers
             CreateMap<CategoryDbModel, CategoryDto>();
             CreateMap<ProductDbModel, ProductDto>().ReverseMap();
             CreateMap<ManufacturerDbModel, ManufacturerDto>();
-            CreateMap<CreateProductRequest, ProductDto>();
             CreateMap<ProductDbModel, ShortProductDto>();
+            CreateMap<CreateProductDto, ProductDto>();
         }
     }
 }

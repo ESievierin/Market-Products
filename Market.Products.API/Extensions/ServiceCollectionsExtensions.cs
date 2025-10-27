@@ -1,8 +1,13 @@
-﻿using Market.Products.API.Mappers;
+﻿using Amazon.S3;
+using Market.Products.API.Mappers;
 using Market.Products.BLL.Interfaces;
 using Market.Products.BLL.Services;
 using Market.Products.DAL.EF;
+using Market.Products.Tools.Interfaces.Storage;
+using Market.Products.Tools.Storage;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 namespace Market.Products.API.Extensions
@@ -54,6 +59,17 @@ namespace Market.Products.API.Extensions
                 var marketProductsConnectionString = "MarketProductsDbContext";
                 options.UseNpgsql(builder.Configuration.GetConnectionString(marketProductsConnectionString));
             });
+            return builder;
+        }
+
+        public static WebApplicationBuilder AddFileService(this WebApplicationBuilder builder) 
+        {
+            builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
+            builder.Services.AddAWSService<IAmazonS3>();
+            builder.Services.AddScoped<IFileStorageService, S3FileStorageService>();
+
+            builder.Services.AddScoped<IImageManager, ImageManager>();
+
             return builder;
         }
         public static WebApplicationBuilder AddTime(this WebApplicationBuilder builder) 

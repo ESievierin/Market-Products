@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.0.1" />
+    <PackageReference Include="AWSSDK.Core" Version="4.0.0.28" />
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.3" />
     <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -21,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Market.Products.BLL\Market.Products.BLL.csproj" />
     <ProjectReference Include="..\Market.Products.DAL\Market.Products.DAL.csproj" />
+    <ProjectReference Include="..\Market.Products.Tools\Market.Products.Tools.csproj" />
   </ItemGroup>
 
 </Project>

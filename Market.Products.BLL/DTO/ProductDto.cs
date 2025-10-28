@@ -11,6 +11,7 @@ namespace Market.Products.BLL.DTO
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
         public int ManufacturerId { get; set; }
+        public Guid? ImageKey { get; set; }
     }
 
     public sealed class ProductsFilterDto : FiltersPagination

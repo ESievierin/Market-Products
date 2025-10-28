@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
-using Market.Products.API.Models;
 using Market.Products.BLL.DTO;
 using Market.Products.BLL.Interfaces;
 using Market.Products.BLL.Models.Filters;
+using Market.Products.Tools.Interfaces.Storage;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 namespace Market.Products.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController(IProductService productService, IMapper mapper) : ControllerBase
+    public class ProductController(IProductService productService, IMapper mapper, IImageManager imageManager) : ControllerBase
     {
         [HttpGet("{id}")]
         public async Task<ProductDto> GetByIdAsync(int id) =>
@@ -38,11 +39,11 @@ namespace Market.Products.API.Controllers
             await productService.GetProductDetailsByIdAsync(id);
 
         [HttpPost("create")]
-        public async Task Create(CreateProductRequest product) =>
-            await productService.CreateAsync(mapper.Map<ProductDto>(product));
+        public async Task CreateAsync(CreateProductDto product) =>
+            await productService.CreateAsync(product);
 
         [HttpPost("update")]
-        public async Task Create(ProductDto product) =>
+        public async Task UpdateAsync(ProductDto product) =>
             await productService.UpdateAsync(product);
     }
 }

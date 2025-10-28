@@ -1,12 +1,13 @@
 ﻿using Market.Products.BLL.DTO;
 using Market.Products.DAL.EF;
+using Market.Products.Tools.Interfaces.Storage;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Market.Products.BLL.RequestHandlers.Product
 {
     public record GetShortProductsByCategoryQuery(int CategoryId) : IRequest<ShortProductDto[]>;
-    public sealed class GetShortProductsByCategoryQueryHandler(MarketProductsDbContext dbContext) : IRequestHandler<GetShortProductsByCategoryQuery, ShortProductDto[]>
+    public sealed class GetShortProductsByCategoryQueryHandler(MarketProductsDbContext dbContext, IImageManager imageManager) : IRequestHandler<GetShortProductsByCategoryQuery, ShortProductDto[]>
     {
         public async Task<ShortProductDto[]> Handle(GetShortProductsByCategoryQuery request, CancellationToken cancellationToken) =>
             await dbContext.Products
@@ -17,6 +18,7 @@ namespace Market.Products.BLL.RequestHandlers.Product
                     Id = p.Id,
                     Name = p.Name,
                     Price = p.Price,
+                    ImageUrl = imageManager.GetImageUrlByKey(p.ImageKey)
                 })
                 .ToArrayAsync(cancellationToken);
     }

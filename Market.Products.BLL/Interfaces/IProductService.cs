@@ -11,6 +11,6 @@ namespace Market.Products.BLL.Interfaces
         public Task<ProductDto> GetByIdAsync(int id);
         public Task<ProductDetailsDto> GetProductDetailsByIdAsync(int id);
         public Task UpdateAsync(ProductDto product);
-        public Task CreateAsync(ProductDto product);
+        public Task CreateAsync(CreateProductDto product);
     }
 }
